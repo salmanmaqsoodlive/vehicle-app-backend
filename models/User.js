@@ -42,6 +42,7 @@ const userSchema = new Schema(
         ref: "Vehicle",
       },
     ],
+    categories: [{ type: Schema.Types.ObjectId, ref: "VehicleCategory" }],
   },
   {
     timestamps: true,

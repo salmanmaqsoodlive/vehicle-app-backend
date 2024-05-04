@@ -6,7 +6,6 @@ class AuthController {
       const data = await authService.signup(req.body);
       res.status(201).json(data);
     } catch (err) {
-      console.log(err);
       res.status(400).json({ message: err.message });
     }
   }
