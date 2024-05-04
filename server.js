@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const express = require("express");
 const mongoose = require("mongoose");
+const apiRouter = require('./routes/index');
 
 const app = express();
 
@@ -10,11 +11,14 @@ const MONGODB_URI = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_P
 
 app.use(express.json());
 
-app.get("/", (req, res) => res.send("Hello from app"));
+app.use('/api', apiRouter);
 
 mongoose
   .connect(MONGODB_URI)
   .then(() =>
-    app.listen(PORT, () => console.log(`Server listening on port: ${PORT}`))
+    app.listen(PORT, () => {
+      console.log("Connected to database");
+      console.log(`Server listening on port: ${PORT}`);
+    })
   )
   .catch((error) => console.error("An error occurred:", error));
