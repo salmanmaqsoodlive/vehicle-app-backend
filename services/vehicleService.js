@@ -28,7 +28,9 @@ class VehicleService {
   }
 
   async getAllVehicles() {
-    const vehicles = await Vehicle.find().populate("category");
+    const vehicles = await Vehicle.find()
+      .populate("category")
+      .sort({ createdAt: -1 });
     if (vehicles.length < 1) {
       throw new Error("Vehicles not found");
     }

@@ -26,15 +26,6 @@ const userSchema = new Schema(
       type: String,
       required: true,
       minlength: [6, "Password must be at least 6 characters long"],
-      validate: {
-        validator: (value) => {
-          return /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$/gm.test(
-            value
-          );
-        },
-        message:
-          "Password must contain at least one lowercase letter, one uppercase letter, and one number",
-      },
     },
     vehicles: [
       {
@@ -80,6 +71,8 @@ userSchema.pre("remove", async function (next) {
 userSchema.methods.toJSON = function () {
   const userObject = this.toObject();
   delete userObject.password;
+  delete userObject.vehicles;
+  delete userObject.categories;
   return userObject;
 };
 
