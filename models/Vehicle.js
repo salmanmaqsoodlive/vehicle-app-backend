@@ -24,6 +24,11 @@ const vehicleSchema = new Schema(
       ref: "VehicleCategory",
       required: true,
     },
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
   },
   {
     timestamps: true,
