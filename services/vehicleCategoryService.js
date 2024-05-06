@@ -24,9 +24,7 @@ class VehicleCategoryService {
 
   async getAllCategories() {
     const categories = await VehicleCategory.find();
-    if (categories.length < 1) {
-      throw new Error("Categories not found");
-    }
+
     return categories;
   }
 
@@ -58,7 +56,7 @@ class VehicleCategoryService {
       });
 
       if (!category) {
-        throw new Error("Category not found");
+        throw new Error("You are not the owner");
       }
 
       const updatedCategory = await VehicleCategory.findOneAndUpdate(
@@ -76,7 +74,7 @@ class VehicleCategoryService {
   async deleteCategory(userId, id) {
     const category = await VehicleCategory.findOne({ _id: id, user: userId });
     if (!category) {
-      throw new Error("Category not found");
+      throw new Error("You are not the owner");
     }
 
     await VehicleCategory.deleteOne({ _id: id });

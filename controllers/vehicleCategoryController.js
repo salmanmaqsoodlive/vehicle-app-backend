@@ -40,7 +40,7 @@ class VehicleCategoryController {
         req.body
       );
 
-      res.status(404).json({ data, message: "Category not found" });
+      res.status(200).json(data);
     } catch (err) {
       res.status(500).json({ message: err.message });
     }

@@ -31,9 +31,6 @@ class VehicleService {
     const vehicles = await Vehicle.find()
       .populate("category")
       .sort({ createdAt: -1 });
-    if (vehicles.length < 1) {
-      throw new Error("Vehicles not found");
-    }
     return vehicles;
   }
 
@@ -54,7 +51,7 @@ class VehicleService {
     try {
       let vehicle = await Vehicle.findOne({ _id: id, user: userId });
       if (!vehicle) {
-        throw new Error("Vehicle not found");
+        throw new Error("You are not the owner");
       }
 
       // Sanitize the vehicleData
@@ -84,7 +81,7 @@ class VehicleService {
   async deleteVehicle(userId, id) {
     const vehicle = await Vehicle.findOne({ _id: id, user: userId });
     if (!vehicle) {
-      throw new Error("Vehicle not found");
+      throw new Error("You are not the owner");
     }
 
     await Vehicle.deleteOne({ _id: id });
