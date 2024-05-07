@@ -2,6 +2,10 @@
 
 # -2 Setup the env
 
-# Start the server
+# -3 Install the dependencies
+
+`npm install`
+
+# -4 Start the server
 
 `npm start`
